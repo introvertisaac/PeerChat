@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>PeerChat</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='lobby.css'>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>PeerChat</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='lobby.css'>
+  <style>
+    #payment-btn {
+      box-sizing: border-box;
+      color: #fff;
+      width: 100%;
+      margin: 0;
+      border: none;
+      border-radius: 5px;
+      padding: 16px 20px;
+      font-size: 15px;
+      background-color: #24ce6b; /* Red color */
+      margin-top: 32px;
+      cursor: pointer; /* Add cursor pointer for better UX */
+    }
+  </style>
 </head>
 <body>
-    
-    <main id="lobby-container">
-        <img src="icons/mascot.png" id="background-image" alt="Background Image">
-        <div id="form-container">
-            <img src="icons/zahara-logo.png" alt="Image Above Heading">
-            <div id="form__container__header">
-                <p>👋 Create or Join Call 👋</p>
-            </div>
-
-            <div id="form__content__wrapper">
-                <form id="join-form">
-                    <input type="text" name="invite_link" required/>
-                    <input type="submit" value="Join Call" />
-                </form>
-            </div>
-        </div>
-    </main>
-
+  <main id="lobby-container">
+    <img src="icons/mascot.png" id="background-image" alt="Background Image">
+    <div id="form-container">
+      <img src="icons/zahara-logo.png" alt="Image Above Heading">
+      <div id="form__container__header">
+        <p>👋 Create or Join Call 👋</p>
+      </div>
+      <div id="form__content__wrapper">
+        <button id="payment-btn">Open Payment Page</button>
+        <form id="join-form">
+          <input type="text" name="invite_link" required/>
+          <input type="submit" value="Join Call" disabled />
+        </form>
+      </div>
+    </div>
+  </main>
 </body>
-
 <script>
-    let form = document.getElementById('join-form')
+  let form = document.getElementById('join-form');
+  let joinBtn = form.querySelector('input[type="submit"]');
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault()
-        let inviteCode = e.target.invite_link.value
-        window.location = `index.html?room=${inviteCode}` 
-    })
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let inviteCode = e.target.invite_link.value;
+    window.location = `index.html?room=${inviteCode}`;
+  });
+
+  let paymentBtn = document.getElementById('payment-btn');
+  paymentBtn.addEventListener('click', () => {
+    // Open Paystack payment page URL
+    window.open('https://paystack.com/pay/d2rns5u-2l', '_blank');
+
+    // Enable the "Join Call" button after 30 seconds
+    setTimeout(() => {
+      joinBtn.disabled = false;
+    }, 30000);
+  });
 </script>
-
 </html>

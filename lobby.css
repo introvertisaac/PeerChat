@@ -63,3 +63,17 @@ input {
 input[type='submit'] {
   background-color: #845695;
 }
+
+#payment-btn {
+  box-sizing: border-box;
+  color: #fff;
+  width: 100%;
+  margin: 0;
+  border: none;
+  border-radius: 5px;
+  padding: 16px 20px;
+  font-size: 15px;
+  background-color: #ff0000; /* Red color */
+  margin-top: 32px;
+  cursor: pointer; /* Add cursor pointer for better UX */
+}
